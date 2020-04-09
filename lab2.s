@@ -78,6 +78,10 @@ clc
 
 loop2:
 
+xorl %eax, %eax
+movl mnoznik(, %esi, 4), %eax
+mull %ecx
+
 cmpl $0, %esi
 je dalej
 
@@ -95,10 +99,6 @@ dalej:
 
 cmpl $licznik_we, %esi
 je przesun
-
-xorl %eax, %eax
-movl mnoznik(, %esi, 4), %eax
-mull %ecx
 
 xorl %ebx, %ebx
 movl %edi, %ebx
@@ -133,4 +133,5 @@ wyjdz:
 movl $EXIT, %eax
 movl $STDIN, %ebx
 int $0x80
+
 

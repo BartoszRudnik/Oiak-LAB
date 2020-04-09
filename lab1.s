@@ -117,5 +117,3 @@ WYJDZ:
 mov $EXIT, %eax
 mov $STDIN, %ebx
 int $0x80
-
-    
