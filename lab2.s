@@ -76,48 +76,47 @@ xorl %esi, %esi
 xorl %ebx, %ebx
 clc
 
-	loop2:
+loop2:
 
-	xorl %eax, %eax
-	movl mnoznik(, %esi, 4), %eax
-	mull %ecx
+xorl %eax, %eax
+movl mnoznik(, %esi, 4), %eax
+mull %ecx
 
-	cmpl $0, %esi
-	je dalej
+cmpl $0, %esi
+je dalej
 
-	popf
+popf
 
-	przeniesienie:
+przeniesienie:
 
-	jnc dalej
-	incl %ebx
-	adcl $0, iloczyn(, %ebx, 4)
+jnc dalej
+incl %ebx
+adcl $0, iloczyn(, %ebx, 4)
 
-	jmp przeniesienie
+jmp przeniesienie
 
-	dalej:
+dalej:
 
-	cmpl $licznik_we, %esi
-	je przesun
-
-	xorl %ebx, %ebx
-	movl %edi, %ebx
-	addl %esi, %ebx
-	clc
-
-	addl %eax, iloczyn(, %ebx, 4)
-	incl %ebx
-	adcl %edx, iloczyn(, %ebx, 4)
-	incl %esi
-
-	pushf
-
-	jmp loop2
-
-przesun:
-
+cmpl $licznik_we, %esi
+jne dodaj
 incl %edi
 jmp loop1
+
+dodaj:
+
+xorl %ebx, %ebx
+movl %edi, %ebx
+addl %esi, %ebx
+clc
+
+addl %eax, iloczyn(, %ebx, 4)
+incl %ebx
+adcl %edx, iloczyn(, %ebx, 4)
+incl %esi
+
+pushf
+
+jmp loop2
 
 wypisz:
 
@@ -133,5 +132,4 @@ wyjdz:
 movl $EXIT, %eax
 movl $STDIN, %ebx
 int $0x80
-
 
