@@ -1,17 +1,15 @@
-READ = 3
-STDIN = 0
+WRITE = 4
+STDOUT = 1
 
 .section .data
-wejscie_len = 1
-
-.section .bss
-.comm bufor, 256
+wyjscie: .ascii "0"
+wyjscie_len = . - wyjscie
 
 .section .text
 
-.global read
-.type read, @function
-read:
+.global write
+.type write, @function
+write:
 
 pushl %edi
 pushl %esi
@@ -30,10 +28,10 @@ movl %eax, start(,%edi,4)
 incl %edi
 movl %edx, start(,%edi,4)
 
-movl $READ, %eax
-movl $STDIN, %ebx
-movl $bufor, %ecx
-movl $wejscie_len, %edx
+movl $WRITE, %eax
+movl $STDOUT, %ebx
+movl $wyjscie, %ecx
+movl $wyjscie_len, %edx
 int $0x80
 
 xorl %eax, %eax

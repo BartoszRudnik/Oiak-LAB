@@ -1,20 +1,20 @@
 #include <stdio.h>
 
-void read();
+void write();
 
 unsigned long long start;
 unsigned long long koniec;
 
 int main(void){
-	
+
 	for(int i = 0; i < 50; i++){
-		
-		read();
+
+		write();
 		koniec -= start;
 
-		printf("[%d] %llu\n", i, koniec);
+		printf(" [%d] = %llu\n", i, koniec);
 
-	}	
+	}
 
 	return 0;
 
