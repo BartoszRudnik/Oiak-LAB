@@ -1,0 +1,6 @@
+
+Kompilacja:
+gcc zad1.s -m32 -o zad1
+
+Uruchomienie:
+./zad1

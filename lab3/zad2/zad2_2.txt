@@ -1,0 +1,7 @@
+Kompilacja:
+
+gcc zad2_2.c zad2_2.s -m32 -O3 -o zad2_2
+
+Uruchomienie:
+
+./zad2_2

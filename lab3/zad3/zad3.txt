@@ -1,0 +1,7 @@
+Kompilacja:
+
+gcc zad3.c zad3.s -m32 -O3 -o zad3
+
+Uruchomienie:
+
+./zad3

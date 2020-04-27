@@ -13,9 +13,7 @@ int main(void){
 
 	printf("Znak: %c\n", znak);
 	
-	for(int i = 0; i < 10; i++){
-		printf("Tablica[%d] = %c\n", i,tablica[i]);
-	}
+	printf("Tablica: %s\n", tablica);
 
 	return 0;
 

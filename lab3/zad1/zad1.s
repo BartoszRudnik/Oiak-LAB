@@ -3,7 +3,7 @@
 EXIT = 0
 
 .section .data
-wejscie: .asciz "%c %s"
+wejscie: .asciz "%c%s"
 
 .section .bss
 
@@ -36,6 +36,6 @@ addl $12, %ebp
 movl %ebp, %esp
 popl %ebp
 
-movl $EXIT, %eax
+pushl $EXIT
 call exit
 
