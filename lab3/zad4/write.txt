@@ -1,0 +1,7 @@
+Kompilacja:
+
+gcc write.c write.s -m32 -O3 -o write
+
+Uruchomienie:
+
+./write

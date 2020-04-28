@@ -1,0 +1,7 @@
+Kompilacja:
+
+gcc scanf.c tsc.s -m32 -O3 -o scanf
+
+Uruchomienie:
+
+cat dane | ./scanf

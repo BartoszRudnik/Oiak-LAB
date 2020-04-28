@@ -1,0 +1,7 @@
+Kompilacja:
+
+gcc pamiec.c pamiec.s -m32 -O3 -o pamiec
+
+Uruchomienie:
+
+./pamiec

@@ -10,7 +10,7 @@ int main(void){
 	for(int i = 0; i < 50; i++){
 		
 		start = tsc();
-		printf("%s"," ");
+		printf(" ");
 		koniec = tsc();
 		
 		koniec -= start;

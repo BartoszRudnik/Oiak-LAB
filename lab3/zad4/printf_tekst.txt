@@ -1,0 +1,7 @@
+Kompilacja:
+
+gcc printf_tekst.c tsc.s -m32 -O3 -o printf_tekst
+
+Uruchomienie:
+
+./printf_tekst

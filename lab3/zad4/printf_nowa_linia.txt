@@ -1,0 +1,7 @@
+Kompilacja:
+gcc printf_nowa_linia.c tsc.s -m32 -O3 -o printf_nowa_linia
+
+Uruchomienie:
+
+./printf_nowa_linia
+

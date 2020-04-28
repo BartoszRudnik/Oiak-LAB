@@ -1,0 +1,7 @@
+Kompilacja:
+
+gcc read.c read.s -m32 -O3 -o read
+
+Uruchomienie:
+
+cat dane | ./read
