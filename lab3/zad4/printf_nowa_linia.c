@@ -7,15 +7,17 @@ int main(void){
 	unsigned long long start;
 	unsigned long long koniec;
 
+	printf("Funkcja printf, krotki tekst ze znakiem nowej linii\n");
+
 	for(int i = 0; i < 50; i++){
 		
 		start = tsc();
-		printf("%s\n" ,"aaaaa");
+		printf("%s\n" ,"aaa");
 		koniec = tsc();
 		
 		koniec -= start;	
 		
-		printf("%llu\n", koniec);
+		printf("[%d] %llu\n", i, koniec);
 
 	}
 

@@ -7,15 +7,17 @@ int main(void){
 	unsigned long long start;
 	unsigned long long koniec;
 
+	printf("Funkcja printf, krotki napis bez znaku nowej linii\n");
+
 	for(int i = 0; i < 50; i++){
 		
 		start = tsc();
-		printf("%s ","aaaaa");
+		printf("%s ","aaa");
 		koniec = tsc();
 		
 		koniec -= start;	
 		
-		printf("%llu\n", koniec);
+		printf("[%d] %llu\n", i, koniec);
 
 	}
 

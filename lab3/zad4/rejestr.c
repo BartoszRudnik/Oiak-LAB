@@ -7,6 +7,8 @@ unsigned long long koniec;
 
 int main(void){
 
+	printf("Operacja zapisu do rejestru\n");
+
 	for(int i = 0; i < 50; i++){
 
 		rejestr();

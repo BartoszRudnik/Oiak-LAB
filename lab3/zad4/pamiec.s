@@ -14,25 +14,20 @@ pushl %ebp
 movl %esp, %ebp
 
 xorl %edi, %edi
-xorl %esi, %esi
 
 xorl %eax, %eax
 cpuid
 rdtsc
 
-movl %eax, start(, %edi, 4)
-incl %edi
-movl %edx, start(, %edi, 4)
+movl %eax, start 
 
-movl $1, bufor(,%esi,4)
+movl $1, bufor(,%edi,4)
 
 xorl %eax, %eax
 cpuid
 rdtsc
 
-movl %eax, koniec(, %esi, 4)
-incl %esi
-movl %edx, koniec(, %esi, 4)
+movl %eax, koniec
 
 movl %ebp, %esp
 popl %ebp

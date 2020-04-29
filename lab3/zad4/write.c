@@ -7,8 +7,12 @@ unsigned long long koniec;
 
 int main(void){
 
-	for(int i = 0; i < 50; i++){
+		
 
+	printf("Funkcja systemowa write\n");
+
+	for(int i = 0; i < 50; i++){
+		
 		write();
 		koniec -= start;
 

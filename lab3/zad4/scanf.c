@@ -9,6 +9,8 @@ int main(void){
 
 	char znak;
 
+	printf("Funkcja scanf\n");
+
 	for(int i = 0; i < 50; i++){
 
 		start = tsc();

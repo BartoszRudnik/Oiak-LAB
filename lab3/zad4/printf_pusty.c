@@ -7,6 +7,8 @@ int main(void){
 	unsigned long long start;
 	unsigned long long koniec;
 
+	printf("Funkcja printf, pusty ciag formatujacy\n");
+
 	for(int i = 0; i < 50; i++){
 		
 		start = tsc();
@@ -15,7 +17,7 @@ int main(void){
 		
 		koniec -= start;
 
-		printf("%llu\n", koniec);
+		printf("[%d] %llu\n", i, koniec);
 
 	}	
 
