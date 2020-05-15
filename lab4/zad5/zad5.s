@@ -1,11 +1,11 @@
 .section .data
-a: .tfloat 2.0
+a: .tfloat 2.05
 b: .tfloat 1.5
-c: .tfloat 1.0
-d: .tfloat 1.5
-e: .tfloat 3.0
-f: .tfloat 2.0
-g: .tfloat 0.1
+c: .tfloat 0.89
+d: .tfloat 1.45
+e: .tfloat 2.56
+f: .tfloat 2.0 
+g: .tfloat 0.34
 h: .tfloat 1.0
 
 .section .text
@@ -232,7 +232,6 @@ fmul %st(0), %st(4)
 fadd %st(0), %st(5)
 fmul %st(0), %st(6)
 fadd %st(0), %st(7)
-
 
 xorl %eax, %eax
 cpuid
