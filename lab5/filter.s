@@ -1,5 +1,5 @@
 .section .data
-ostatni: .long 0
+stop: .long 0
 sumaPoczatkowa:	.word 765,765,765,765
 przesuniecie: .word 3
 
@@ -71,44 +71,40 @@ filter:
 	movl height, %edx
 	mull %edx
 	addl M, %eax
-	movl %eax, ostatni
-	subl $1, ostatni
+	movl %eax, stop
+	subl $1, stop
 
 	movl $4, %eax
 	
-loop:	cmpl %edi, ostatni
+loop:	cmpl %edi, stop
 	jle end	
 
 	movq sumaPoczatkowa, %mm0
-	pxor %mm2, %mm2	
-
+	pxor %mm7, %mm7	
+	
 	movd -2(%ebx), %mm1
-	punpcklbw %mm2, %mm1
-	psubusw %mm1, %mm0
+	punpcklbw %mm7, %mm1
+	movd -1(%ebx), %mm2
+	punpcklbw %mm7, %mm2
+	movd -2(%ecx), %mm3
+	punpcklbw %mm7, %mm3
+	movd (%ecx), %mm4
+	punpcklbw %mm7, %mm4
+	movd -1(%edi), %mm5
+	punpcklbw %mm7, %mm5
+	movd (%edi), %mm6
+	punpcklbw %mm7, %mm6
+
+	psubusw %mm1, %mm0	
+	psubusw %mm2, %mm0	
+	psubusw %mm3, %mm0		
+	paddusw %mm4, %mm0	
+	paddusw %mm5, %mm0
+	paddusw %mm6, %mm0
 	
-	movd -1(%ebx), %mm1
-	punpcklbw %mm2, %mm1
-	psubusw %mm1, %mm0
-	
-	movd -2(%ecx), %mm1
-	punpcklbw %mm2, %mm1
-	psubusw %mm1, %mm0
-		
-	movd (%ecx), %mm1
-	punpcklbw %mm2, %mm1
-	paddusw %mm1, %mm0
-		
-	movd -1(%edi), %mm1
-	punpcklbw %mm2, %mm1
-	paddusw %mm1, %mm0
-	
-	movd (%edi), %mm1
-	punpcklbw %mm2, %mm1
-	paddusw %mm1, %mm0
-	
-	psrlw przesuniecie, %mm0
-	
-	packuswb %mm2, %mm0
+	psrlw przesuniecie, %mm0	
+	packuswb %mm7, %mm0
+
 	movd %mm0, (%esi)
 
 	leal (%eax,%ebx), %ebx

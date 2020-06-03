@@ -118,7 +118,7 @@ int main (int argc, char ** argv)
 	unsigned long long koniec = mtime();
 
 	koniec -= start;
-	koniec /= size;
+	koniec /= (width * height);
 	printf("Liczba cykli zegara na element macierzy wynikowej: %llu\n",koniec);
 	
 	png_structp write_png_ptr =

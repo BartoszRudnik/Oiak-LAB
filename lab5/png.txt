@@ -1,0 +1,2 @@
+Kompilacja:
+gcc png.c filter.s -m32 -O3 -lpng -o png
