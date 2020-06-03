@@ -1,8 +1,13 @@
 .section .data
-rozmiar: .long 0
 ostatni: .long 0
-zeros: .long 0
-sumaPoczatkowa:	.word 1024,1024,1024,1024
+sumaPoczatkowa:	.word 765,765,765,765
+przesuniecie: .word 3
+
+.section .bss
+.comm M,4
+.comm W,4
+.comm width,4
+.comm height,4
 
 .section .text
 
@@ -30,79 +35,98 @@ filter:
 	pushl %ebp
 	movl %esp, %ebp
 
+	pushl %eax
 	pushl %ebx
 	pushl %ecx
+	pushl %edx
 	pushl %esi
 	pushl %edi
 
+	movl 8(%ebp), %eax
+	movl %eax, M
+
+	movl 12(%ebp), %eax
+	movl %eax, W
+
 	movl 16(%ebp), %eax
-	movl 20(%ebp), %ebx
-	mull %ebx
-	movl %eax, rozmiar
-	
-	xorl %ebx, %ebx
-	xorl %eax, %eax
+	movl %eax, width
 
-	movl 8(%ebp), %ebx
-	addl rozmiar, %ebx
-	movl %ebx, ostatni				
+	movl 20(%ebp), %eax
+	movl %eax, height
 
-	movl 8(%ebp), %edx
-	leal (%edx), %ebx
+	movl M, %eax
+	leal 2(%eax), %ebx
 	
-	addl 16(%ebp), %edx	
-	leal (%edx), %ecx
+	addl width, %eax	
+	leal 2(%eax), %ecx
 	
-	addl 16(%ebp), %edx		
-	leal (%edx), %edi	
+	addl width, %eax		
+	leal 2(%eax), %edi	
 
-	movl 12(%ebp), %edx
-	movl 16(%ebp), %eax				
-	leal 1(%eax, %edx, 1), %esi	
-loop:
+	movl W, %esi
+	movl width, %eax				
+	leal 1(%eax, %esi,), %esi	
+
+	movl width, %eax
+	movl height, %edx
+	mull %edx
+	addl M, %eax
+	movl %eax, ostatni
+	subl $1, ostatni
+
+	movl $4, %eax
+	
+loop:	cmpl %edi, ostatni
+	jle end	
+
 	movq sumaPoczatkowa, %mm0
+	pxor %mm2, %mm2	
+
+	movd -2(%ebx), %mm1
+	punpcklbw %mm2, %mm1
+	psubusw %mm1, %mm0
 	
-	movd (%ebx), %mm1
-	punpcklbw zeros, %mm1
-	psubw %mm1, %mm0
+	movd -1(%ebx), %mm1
+	punpcklbw %mm2, %mm1
+	psubusw %mm1, %mm0
 	
-	movd 1(%ebx), %mm2
-	punpcklbw zeros, %mm2
-	psubw %mm2, %mm0
-	
-	movd (%ecx), %mm3
-	punpcklbw zeros, %mm3
-	psubw %mm3, %mm0
+	movd -2(%ecx), %mm1
+	punpcklbw %mm2, %mm1
+	psubusw %mm1, %mm0
 		
-	movd 2(%ecx), %mm5
-	punpcklbw zeros, %mm5
-	paddw %mm5, %mm0
+	movd (%ecx), %mm1
+	punpcklbw %mm2, %mm1
+	paddusw %mm1, %mm0
 		
-	movd 1(%edi), %mm6
-	punpcklbw zeros, %mm6
-	paddw %mm6, %mm0
+	movd -1(%edi), %mm1
+	punpcklbw %mm2, %mm1
+	paddusw %mm1, %mm0
 	
-	movd 2(%edi), %mm7
-	punpcklbw zeros, %mm7
-	paddw %mm7, %mm0
+	movd (%edi), %mm1
+	punpcklbw %mm2, %mm1
+	paddusw %mm1, %mm0
 	
-	psrlw $3, %mm0
+	psrlw przesuniecie, %mm0
 	
-	packuswb zeros, %mm0
+	packuswb %mm2, %mm0
 	movd %mm0, (%esi)
 
-	leal 4(,%ebx,1), %ebx
-	leal 4(,%ebx,1), %ecx
-	leal 4(,%edi,1), %edi
-	leal 4(,%esi,1), %esi
+	leal (%eax,%ebx), %ebx
+	leal (%eax,%ecx), %ecx
+	leal (%eax,%edi), %edi
+	leal (%eax,%esi), %esi
 
-	cmpl %edi, ostatni
-	jge loop
-			
+	jmp loop			
+	
+end:	emms
+
 	popl %edi
 	popl %esi
+	popl %edx
 	popl %ecx
 	popl %ebx
+	popl %eax
+
 	movl %ebp, %esp
 	popl %ebp
 	
