@@ -4,31 +4,7 @@
 
 #define ERROR                                                   \
 	fprintf (stderr, "ERROR at %s:%d.\n", __FILE__, __LINE__) ;   \
-	return -1 ;                                                   \
-
-void c_filtr( unsigned char * M, unsigned char * W, int width, int height){
-
-	int suma;
-
-	for(int i = 1; i < width - 1; i++){
-
-		for(int j = 1; j < height - 1; j++){
-			
-			suma = 1024;
-			suma -= M[(j - 1) * width + i - 1];
-			suma -= M[(j - 1) * width + i];
-			suma -= M[(j * width) - 1 + i];
-			suma += M[(j * width) + 1 + i];
-			suma += M[(j + 1) * width + i];
-			suma += M[(j + 1) * width + 1 + i];
-
-			W[j * width + i] = suma/8;			
-		
-		}
-	
-	} 
-
-}
+	return -1 ;                                                 \
 
 unsigned long long mtime();
 
