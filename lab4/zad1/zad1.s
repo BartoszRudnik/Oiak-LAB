@@ -11,5 +11,4 @@ fstsw %ax
 movl %ebp, %esp
 popl %ebp
 
-
 ret 
